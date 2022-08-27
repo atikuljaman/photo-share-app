@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { RiHomeFill } from "react-icons/ri";
 import { IoIosArrowForward } from "react-icons/io";
+import { categories } from "../utils/data";
 
 import logo from "../assets/logo.png";
 
@@ -10,14 +11,6 @@ const isNotActiveStyle =
 
 const isActiveStyle =
   "flex items-center gap-5 px-3 font-extrabold border-r-2 border-black transition-all duration-200 ease-in-out capitalize";
-
-const categories = [
-  { name: "Animals" },
-  { name: "Wallpapers" },
-  { name: "Photography" },
-  { name: "Gaming" },
-  { name: "Coding" },
-];
 
 const Sidebar = ({ user, closeToggle }) => {
   const handleCloseSidebar = () => {
@@ -34,7 +27,7 @@ const Sidebar = ({ user, closeToggle }) => {
         >
           <img src={logo} alt="logo" className="w-full" />
         </Link>
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col px-2 gap-5">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -45,7 +38,7 @@ const Sidebar = ({ user, closeToggle }) => {
             <RiHomeFill />
             Home
           </NavLink>
-          <h3 className="mt-2 px-5 text-base 2xl:text-xl">
+          <h3 className="mt-2 px-3 text-base 2xl:text-xl">
             Discover categories
           </h3>
           {categories.slice(0, categories.length - 1).map((category) => (
@@ -57,6 +50,11 @@ const Sidebar = ({ user, closeToggle }) => {
               onClick={handleCloseSidebar}
               key={category?.name}
             >
+              <img
+                src={category?.image}
+                className="w-8 h-8 rounded-full shadow-sm"
+                alt="Category-pic"
+              />
               {category?.name}
             </NavLink>
           ))}
@@ -73,7 +71,9 @@ const Sidebar = ({ user, closeToggle }) => {
             alt="user-profile"
             className="w-10 h-10 rounded-full"
           />
-          <p>{user?.userName}</p>
+          <p className="flex items-center m-0 gap-1">
+            {user?.userName} <IoIosArrowForward />
+          </p>
         </Link>
       )}
     </div>
